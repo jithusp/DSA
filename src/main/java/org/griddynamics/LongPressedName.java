@@ -21,4 +21,11 @@ public class LongPressedName {
 //        if(i==name.length())return true;
         return i==name.length();
     }
+    public static void main(String args[]){
+        LongPressedName checker = new LongPressedName();
+        String name = "alex";
+        String typed = "aaleex";
+        boolean result = checker.isLongPressedName(name, typed);
+        System.out.println("Is long pressed? " + result);  // Output: true
+    }
 }

@@ -19,4 +19,14 @@ public class GroupAnagrams {
 //        return null;
         return new ArrayList<>(ans.values());
     }
+    public static void main(String args[]){
+        GroupAnagrams solver = new GroupAnagrams();
+        String[] input = {"eat", "tea", "tan", "ate", "nat", "bat"};
+        List<List<String>> grouped = solver.groupAnagrams(input);
+        System.out.println("Grouped Anagrams:");
+        for (List<String> group : grouped) {
+            System.out.println(group);
+        }
+    }
+
 }

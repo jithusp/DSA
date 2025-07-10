@@ -34,5 +34,16 @@ public class ThreeSum {
         }
         return answer;
     }
+    public static void main(String[] args) {
+//        ThreeSum Problem from leetcode:
+        ThreeSum solver = new ThreeSum();
+        int[] nums = {-1, 0, 1, 2, -1, -4};
+        List<List<Integer>> result = solver.threeSum(nums);
+
+        System.out.println("Triplets that sum to zero:");
+        for (List<Integer> triplet : result) {
+            System.out.println(triplet);
+        }
+    }
 }
 
