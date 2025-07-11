@@ -3,7 +3,7 @@ package org.griddynamics;
 import java.util.Stack;
 
 public class ReversedString {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         String input = "My Name is John Honai. I am a don ";
         System.out.println("The reversed string is : " + getItReversed(input));
     }
