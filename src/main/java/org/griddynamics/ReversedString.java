@@ -1,5 +1,7 @@
 package org.griddynamics;
 
+import java.util.Stack;
+
 public class ReversedString {
     public static void main(String args[]) {
         String input = "My Name is John Honai. I am a don ";
@@ -7,18 +9,28 @@ public class ReversedString {
     }
 
     public static String getItReversed(String input) {
-        String[] splitInput = input.split("\\.");
-        String[] eachWord = splitInput[0].trim().split("\\s+");
+        String[] eachWord= input.trim().split("\\s");
+        System.out.println(eachWord.toString());
         StringBuilder result = new StringBuilder();
-        for (int j = 0; j <splitInput.length; j++) {
-            for (int i = eachWord.length - 1; i >= 0; i--) {
-                result.append(eachWord[i]);
-                result.append(" ");
-            }
-
-            if (splitInput.length - 1 != j) result.append(".");
+//        for (int j = 0; j <splitInput.length; j++) {
+//            for (int i = eachWord.length - 1; i >= 0; i--) {
+//                result.append(eachWord[i]);
+//                result.append(" ");
+//            }
+//
+//            if (splitInput.length - 1 != j) result.append(".");
+//        }
+//        return result.toString();
+        Stack<String> stack =new Stack<>();
+        for(String a:eachWord){
+            stack.push(a);
         }
-        return result.toString();
+        while (!stack.isEmpty()){
+            result.append(stack.pop());
+            result.append(" ");
+        }
+    return result.toString();
+
     }
     /// /use stack and check it out
 }
