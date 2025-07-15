@@ -56,6 +56,13 @@ public class EmployeeStreamApi {
                 .map(e -> e.getName())
                 .forEach(System.out::println);
 
+        employees.stream()
+                .filter(e->e.getDepartment().equalsIgnoreCase("HR")&&e.getSalary()>30000)
+                .sorted(Comparator.comparingInt(Employee::getSalary).reversed())
+                .limit(10)
+                .map(e->e.getName())
+                .forEach(System.out::println);
+
         List<String> strings = Arrays
                 .asList("apple", "banana", "cherry", "date", "grapefruit");
         Optional<String> ans = strings.stream()
