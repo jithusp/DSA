@@ -3,7 +3,7 @@ package org.griddynamics;
 public class StockBuyAndSell {
         int[] prices = {1, 2, 9, 7, 6};
           // Output: 8
-
+// multiple transactions
         public static int getMaxProfit(int[] prices){
             int minPrice=Integer.MAX_VALUE;
             int profit=0;
