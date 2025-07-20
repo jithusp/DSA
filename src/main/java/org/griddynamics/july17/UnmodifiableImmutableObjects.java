@@ -1,6 +1,8 @@
 package org.griddynamics.july17;
 import java.util.*;
 import java.util.stream.Collectors;
+// Dont use objects as mutable
+// handle deletion, with concurrent modification exception
 public class UnmodifiableImmutableObjects {
         public static class MutablePerson {
             private String name;
