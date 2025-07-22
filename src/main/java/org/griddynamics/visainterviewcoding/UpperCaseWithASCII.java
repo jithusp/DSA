@@ -1,4 +1,4 @@
-package org.griddynamics;
+package org.griddynamics.visainterviewcoding;
 
 public class UpperCaseWithASCII {
     public static void main(String[] args){

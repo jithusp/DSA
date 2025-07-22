@@ -1,4 +1,4 @@
-package org.griddynamics;
+package org.griddynamics.july16;
 
 public class TreeTraversals {
     static class TreeNode {

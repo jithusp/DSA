@@ -1,0 +1,46 @@
+1)
+assumption that there is a table called Course , class and students::
+select class from courses group by class having count(student) >= 5;
+2)
+select user_id, count(follower_id) as followers_count from followers group by user_id order by user_id;
+3)
+select max(num) as num from numbers where num in (select num from numbers group by num having count(*) = 1);
+4)
+select customerid from customer group by customer_id having count(distinct product_key) = (select count(*) from product);
+5)
+select e1.employee_id, e1.name, count(e2.employee_id) as reports_count, round(avg(e2.age), 0) as average_age from employees e1 join employees e2 on e1.employee_id = e2.reports_to group by e1.employee_id order by e1.employee_id;
+6)
+select employeeid, departmentid from employee where primaryflag = 'y' union select employeeid, departmentid from employee group by employeeid having count(*) = 1;
+7)
+select x, y, z, if(x + y > z and y + z > x and z + x > y, 'yes', 'no') as triangle from triangle;
+8)
+select distinct l1.num as consecutive from logs l1 join logs l2 on l1.id = l2.id - 1 join logs l3 on l2.id = l3.id - 1 where l1.num = l2.num and l2.num = l3.num;
+9)
+select p.product_id, coalesce(lp.new_price, 10) as price from (select distinct product_id from products) p left join (select product_id, new_price, rank() over (partition by product_id order by change_date desc) as rnk from products where change_date <= '2019-08-16') lp on p.product_id = lp.product_id and lp.rnk = 1;
+10)
+select person_name from (select person_name, weight, turn, sum(weight) over (order by turn) as total_weight from queue) q where total_weight = (select max(total_weight) from (select sum(weight) over (order by turn) as total_weight from queue) t where total_weight <= 1000);
+11)
+select 'low salary' as category, count(*) as accounts_count from accounts where income < 20000 union select 'average salary', count(*) from accounts where income between 20000 and 50000 union select 'high salary', count(*) from accounts where income > 50000;
+12)
+select employee_id from employees where salary < 30000 and manager_id not in (select employee_id from employees) order by employee_id;
+13)
+select case when mod(id, 2) = 1 and id + 1 <= (select max(id) from seat) then id + 1 when mod(id, 2) = 0 then id - 1 else id end as id, student from seat order by id;
+14)
+select name as results from (select name, count(*) as c from movies join movierating using(movie_id) join users using(user_id) group by user_id order by c desc, name asc limit 1) a union all select title from (select title, avg(rating) as avg_rating from movies join movierating using(movie_id) where year(created_at) = 2020 and month(created_at) = 2 group by movie_id order by avg_rating desc, title asc limit 1) b;
+15)
+select distinct visited_on, amount, round(amount / 7, 2) as average_amount from (select visited_on, sum(amount) over (order by visited_on range between interval 6 day preceding and current row) as amount from customer) t where datediff(t.visited_on, (select min(visited_on) from customer)) >= 6;
+16)
+select id, sum(num) as num from (select requester_id as id, count(*) as num from requestaccepted group by requester_id union all select accepter_id, count(*) from requestaccepted group by accepter_id) a group by id order by num desc limit 1;
+17)
+select round(sum(tiv_2016), 2) as tiv_2016 from insurance where tiv_2015 in (select tiv_2015 from insurance group by tiv_2015 having count(*) > 1) and (lat, lon) in (select lat, lon from insurance group by lat, lon having count(*) = 1);
+18)
+select department, employee, salary from (select d.name as department, e.name as employee, e.salary, dense_rank() over (partition by e.departmentid order by e.salary desc) as rnk from employee e join department d on e.departmentid = d.id) a where rnk <= 3;
+19)
+select user_id, concat(upper(left(name, 1)), lower(substring(name, 2))) as name from users order by user_id;
+20)select patient_id, patient_name, conditions from patients where conditions like '% diab1%' or conditions like 'diab1%';
+21)delete p1 from person p1 join person p2 on p1.email = p2.email and p1.id > p2.id;
+22)select max(salary) as secondhighestsalary from employee where salary < (select max(salary) from employee);
+23)select sell_date, count(distinct product) as num_sold, group_concat(distinct product order by product separator ',') as products from activities group by sell_date order by sell_date;
+
+24.select product_name, sum(unit) as unit from products join orders using(product_id) where date_format(order_date, '%y-%m') = '20-02' group by product_id having unit >= 100;
+25.select user_id, name, mail from users where mail regexp '^[a-z][a-z0-9_.-]*@leetcode\\.com$';
